@@ -11,6 +11,7 @@ const renderClients = (clients, handleOnClick) => {
         <th>Client ID</th>
         <th>Name</th>
         <th>Email</th>
+        <th>Phone</th>
         <th>Temp Password</th>
         <th />
       </tr>
@@ -25,6 +26,7 @@ const clientElement = (client, handleOnClick) => {
       <td>{client.id}</td>
       <td>{client.name}</td>
       <td>{client.email}</td>
+      <td>{client.phone}</td>
       <td>{client.password}</td>
       <td>
         <button onClick={() => handleOnClick(client)}>Send Link</button>
