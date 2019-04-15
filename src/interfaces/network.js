@@ -1,5 +1,5 @@
-// const _BASEURL = "https://clipboardy.azurewebsites.net";
-const _BASEURL = "http://localhost:1337";
+const _BASEURL = "https://clipboardy.azurewebsites.net";
+// const _BASEURL = "http://localhost:1337";
 fetch._BASEURL;
 export const fetchClients = async clientid => {
   try {
