@@ -9,8 +9,10 @@ export default class ClientConfig extends Component {
       config: {
         name: null
       },
+      copyValue: "",
       clientId: props.clientid
     };
+    this.textRef;
   }
 
   componentDidMount() {
@@ -31,36 +33,44 @@ export default class ClientConfig extends Component {
   }
 
   async copyToClip() {
-    console.log("copying to clip");
     try {
-      navigator.clipboard.writeText("test").then(
-        () => {
-          console.log("copy success");
-          navigator.clipboard.readText().then(
-            value => {
-              console.log(`copied value ${value}`);
-              alert(value);
-            },
-            () => {
-              console.log("error reading clipboard value");
-            }
-          );
+      let result = await this.execCopy("write this to clippy");
+      console.log(result);
+      console.log("wrote to clipboard");
+      navigator.clipboard.readText().then(
+        v => {
+          console.log(v);
+          this.setState({ copyValue: v });
         },
-        () => {
-          console.log("copy failure");
+        rejected => {
+          console.log(rejected);
         }
       );
-    } catch (err) {
-      alert("Can't copy to clipboard");
+    } catch (error) {
+      console.log(error);
     }
+  }
+
+  execCopy(text) {
+    return new Promise((resolve, reject) => {
+      navigator.clipboard.writeText(text).then(
+        () => {
+          return resolve();
+        },
+        () => {
+          return reject("Cannot access or write to the clipboard");
+        }
+      );
+    });
   }
 
   render() {
     const { name } = this.state.config;
+    const { copyValue } = this.state;
     return (
       <div>
         <h1>Hello there {name}!</h1>
-        <textarea id={"invisible-copy"}>This is some text</textarea>
+        <h3>{copyValue}</h3>
       </div>
     );
   }
