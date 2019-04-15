@@ -15,14 +15,22 @@ export default class ClientConfig extends Component {
 
   componentDidMount() {
     this.refresh(this.state.clientId);
+    this.copyToClip();
   }
 
   async refresh(clientId) {
     console.log(navigator);
     let config = await getClientConfig(clientId);
     this.setState({ config });
-    navigator.clipboard.writeText("test");
-    alert(await navigator.clipboard.readText());
+  }
+
+  async copyToClip() {
+    try {
+      await navigator.clipboard.writeText("test");
+      alert(await navigator.clipboard.readText());
+    } catch (err) {
+      alert(err.message);
+    }
   }
 
   render() {
