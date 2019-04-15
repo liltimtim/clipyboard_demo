@@ -23,7 +23,7 @@ const Clients = props => {
   }
   return (
     <div class={style.clients}>
-      <h1>{prepName}</h1>
+      <h3>{prepName}</h3>
       <ClientList clients={[]} prepid={prepid} />
     </div>
   );

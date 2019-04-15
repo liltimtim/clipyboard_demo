@@ -5,6 +5,7 @@ const Client = props => {
   const { name } = props;
   return (
     <div class={style.client}>
+      <h1>Welcome</h1>
       <ClientConfig clientid={props.clientid} />
     </div>
   );

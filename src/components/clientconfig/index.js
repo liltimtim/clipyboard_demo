@@ -17,7 +17,7 @@ export default class ClientConfig extends Component {
     console.log("component loaded");
     this.refresh(this.state.clientId);
     console.log("did refresh about to copy to clip");
-    this.copyToClip();
+    // this.copyToClip();
   }
 
   async refresh(clientId) {
