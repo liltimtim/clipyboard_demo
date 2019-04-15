@@ -17,7 +17,7 @@ export default class ClientConfig extends Component {
     console.log("component loaded");
     this.refresh(this.state.clientId);
     console.log("did refresh about to copy to clip");
-    // this.copyToClip();
+    this.copyToClip();
   }
 
   async refresh(clientId) {
@@ -33,8 +33,23 @@ export default class ClientConfig extends Component {
   async copyToClip() {
     console.log("copying to clip");
     try {
-      await navigator.clipboard.writeText("test");
-      alert(await navigator.clipboard.readText());
+      navigator.clipboard.writeText("test").then(
+        () => {
+          console.log("copy success");
+          navigator.clipboard.readText().then(
+            value => {
+              console.log(`copied value ${value}`);
+              alert(value);
+            },
+            () => {
+              console.log("error reading clipboard value");
+            }
+          );
+        },
+        () => {
+          console.log("copy failure");
+        }
+      );
     } catch (err) {
       alert("Can't copy to clipboard");
     }
