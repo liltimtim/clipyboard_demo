@@ -14,22 +14,29 @@ export default class ClientConfig extends Component {
   }
 
   componentDidMount() {
+    console.log("component loaded");
     this.refresh(this.state.clientId);
+    console.log("did refresh about to copy to clip");
     this.copyToClip();
   }
 
   async refresh(clientId) {
     console.log(navigator);
-    let config = await getClientConfig(clientId);
-    this.setState({ config });
+    try {
+      let config = await getClientConfig(clientId);
+      this.setState({ config });
+    } catch (err) {
+      alert("cant get config");
+    }
   }
 
   async copyToClip() {
+    console.log("copying to clip");
     try {
       await navigator.clipboard.writeText("test");
       alert(await navigator.clipboard.readText());
     } catch (err) {
-      alert(err.message);
+      alert("Can't copy to clipboard");
     }
   }
 
