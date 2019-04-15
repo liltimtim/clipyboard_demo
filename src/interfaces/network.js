@@ -1,5 +1,5 @@
-const _BASEURL = "https://clipboardy.azurewebsites.net";
-// const _BASEURL = "http://localhost:1337";
+// const _BASEURL = "https://clipboardy.azurewebsites.net";
+const _BASEURL = "http://localhost:1337";
 fetch._BASEURL;
 export const fetchClients = async clientid => {
   try {
@@ -28,6 +28,15 @@ export const sendClientEmail = async client => {
       method: "POST",
       headers: { "Content-Type": "application/json" }
     });
+    return result.json();
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getClientConfig = async clientId => {
+  try {
+    let result = await fetch(`${_BASEURL}/clients/${clientId}/config`);
     return result.json();
   } catch (err) {
     throw err;

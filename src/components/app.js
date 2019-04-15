@@ -4,7 +4,7 @@ import { Router } from "preact-router";
 import Header from "./header";
 
 import Clients from "../routes/clients";
-
+import Client from "../routes/client";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +31,7 @@ export default class App extends Component {
         <Header />
         <Router onChange={this.handleRoute}>
           <Clients path="/preparer/:prepid" />
+          <Client path="/client/:clientid" />
         </Router>
       </div>
     );
