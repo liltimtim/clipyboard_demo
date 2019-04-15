@@ -19,7 +19,9 @@ export default class ClientConfig extends Component {
     console.log("component loaded");
     this.refresh(this.state.clientId);
     console.log("did refresh about to copy to clip");
-    this.copyToClip();
+    this.copyToClip(
+      `https://vigorous-shaw-8057b9.netlify.com/client/${this.state.clientId}`
+    );
   }
 
   async refresh(clientId) {
@@ -32,9 +34,9 @@ export default class ClientConfig extends Component {
     }
   }
 
-  async copyToClip() {
+  async copyToClip(value) {
     try {
-      let result = await this.execCopy("write this to clippy");
+      let result = await this.execCopy(value);
       console.log(result);
       console.log("wrote to clipboard");
       this.setState({ copyValue: `successfully wrote to clipboard` });
