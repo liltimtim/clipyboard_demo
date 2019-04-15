@@ -1,3 +1,5 @@
 /                           /index.html    200
+/preparer                   /index.html    200
 /preparer/*                 /index.html    200
+/client                     /index.html    200
 /client/*                   /index.html    200

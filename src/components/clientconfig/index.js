@@ -37,17 +37,10 @@ export default class ClientConfig extends Component {
       let result = await this.execCopy("write this to clippy");
       console.log(result);
       console.log("wrote to clipboard");
-      navigator.clipboard.readText().then(
-        v => {
-          console.log(v);
-          this.setState({ copyValue: v });
-        },
-        rejected => {
-          console.log(rejected);
-        }
-      );
+      this.setState({ copyValue: `${v} written to clipboard` });
     } catch (error) {
       console.log(error);
+      this.setState({ copyValue: `${error}` });
     }
   }
 

@@ -20,7 +20,9 @@ export const fetchClients = async clientid => {
 export const sendClientEmail = async client => {
   let params = {};
   params["from"] = "test@email.com";
-  params["message"] = "This is a message from your preparer.";
+  params["message"] = `https://vigorous-shaw-8057b9.netlify.com/client/${
+    client.id
+  }`;
   Object.assign(params, client);
   try {
     let result = await fetch(`${_BASEURL}/sendemail`, {
