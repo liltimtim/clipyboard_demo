@@ -3,3 +3,4 @@
 /preparer/*                 /index.html    200
 /client                     /index.html    200
 /client/*                   /index.html    200
+/appopen                    /index.html    200

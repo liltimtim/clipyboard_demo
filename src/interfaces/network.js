@@ -36,6 +36,25 @@ export const sendClientEmail = async client => {
   }
 };
 
+export const sendAppOpenEmail = async client => {
+  let params = {};
+  params["from"] = "test@email.com";
+  params["message"] = `https://vigorous-shaw-8057b9.netlify.com/appopen/${
+    client.id
+  }`;
+  Object.assign(params, client);
+  try {
+    let result = await fetch(`${_BASEURL}/sendemail`, {
+      body: JSON.stringify(params),
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+    });
+    return result.json();
+  } catch (err) {
+    throw err;
+  }
+};
+
 export const getClientConfig = async clientId => {
   try {
     let result = await fetch(`${_BASEURL}/clients/${clientId}/config`);

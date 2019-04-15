@@ -5,6 +5,8 @@ import Header from "./header";
 
 import Clients from "../routes/clients";
 import Client from "../routes/client";
+import Home from "../routes/home";
+import AppOpen from "../routes/appopen";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +32,8 @@ export default class App extends Component {
       <div id="app">
         <Header />
         <Router onChange={this.handleRoute}>
+          <Home path="/" />
+          <AppOpen path="/appopen" />
           <Clients path="/preparer/:prepid" />
           <Client path="/client/:clientid" />
         </Router>
