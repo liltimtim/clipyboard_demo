@@ -4,3 +4,4 @@
 /client                     /index.html    200
 /client/*                   /index.html    200
 /appopen                    /index.html    200
+/apple-app-site-association /apple-app-site-association 200
