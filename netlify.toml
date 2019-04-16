@@ -1,5 +1,5 @@
 [[redirects]]
   from = "/apple-app-site-association"
-  to = "/apple-app-site-assocation"
+  to = "https://clipboardy.azurewebsites.net/apple-app-site-association"
   status = 200
   force = true
