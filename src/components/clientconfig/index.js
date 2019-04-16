@@ -23,9 +23,7 @@ export default class ClientConfig extends Component {
     console.log("component loaded");
     this.refresh(this.state.clientId);
     console.log("did refresh about to copy to clip");
-    this.copyToClip(
-      `https://vigorous-shaw-8057b9.netlify.com/client/${this.state.clientId}`
-    );
+    this.copyToClip(`https://clippy.netlify.com/client/${this.state.clientId}`);
   }
 
   async refresh(clientId) {

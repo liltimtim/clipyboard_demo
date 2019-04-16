@@ -39,9 +39,9 @@ export const sendClientEmail = async client => {
 export const sendAppOpenEmail = async client => {
   let params = {};
   params["from"] = "test@email.com";
-  params[
-    "message"
-  ] = `https://vigorous-shaw-8057b9.netlify.com/appopen?clientid=${client.id}`;
+  params["message"] = `https://clippy.netlify.com/appopen?clientid=${
+    client.id
+  }`;
   Object.assign(params, client);
   try {
     let result = await fetch(`${_BASEURL}/sendemail`, {
