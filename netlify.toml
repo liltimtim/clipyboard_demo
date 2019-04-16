@@ -1,0 +1,6 @@
+[[redirects]]
+    from = "/.well-known"
+    to = "https://clipboardy.azurewebsites.net/apple-app-site-association"
+    status = 200
+    force = true
+    headers = {Content-Type = "application/json" }
