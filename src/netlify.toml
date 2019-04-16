@@ -1,0 +1,5 @@
+[[redirects]]
+from = "/apple-app-site-association"
+  to = "https://vigorous-shaw-8057b9.netlify.com/apple-app-site-assocation"
+  status = 200
+  force = true
