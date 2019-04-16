@@ -37,7 +37,7 @@ export const sendClientEmail = async client => {
 export const sendAppOpenEmail = async client => {
   let params = {};
   params["from"] = "test@email.com";
-  params["message"] = `https://clippy.netlify.com/appopen?clientid=${
+  params["message"] = `https://clippy.netlify.com/openapp?clientid=${
     client.id
   }`;
   Object.assign(params, client);
