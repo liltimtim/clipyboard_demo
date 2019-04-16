@@ -1,5 +1,5 @@
 [[redirects]]
   from = "/apple-app-site-association"
-  to = "https://google.com/apple-app-site-assocation"
+  to = "/apple-app-site-assocation"
   status = 200
   force = true
