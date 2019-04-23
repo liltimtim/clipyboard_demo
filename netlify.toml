@@ -13,8 +13,8 @@
     [redirects.headers]
         Content-Type = "application/json"
 [[redirects]]
-    from = "/.well-known/android-app-site-association"
-    to = "https://clipboardy.azurewebsites.net/applinks.json"
+    from = "/.well-known/applinks.json"
+    to = "https://clipboardy.azurewebsites.net/android-app-site-association"
     status = 200
     force = true
     [redirects.headers]
