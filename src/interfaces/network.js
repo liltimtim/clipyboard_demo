@@ -39,7 +39,7 @@ export const sendAppOpenEmail = async client => {
   params["from"] = "test@email.com";
   params["message"] = `https://clippy.netlify.com/openapp?clientid=${
     client.id
-  }`;
+  }&email=nathanw@mac.com`;
   Object.assign(params, client);
   try {
     let result = await fetch(`${_BASEURL}/sendemail`, {
