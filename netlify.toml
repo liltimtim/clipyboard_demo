@@ -1,6 +1,13 @@
 [[redirects]]
-    from = "/.well-known"
+    from = "/.well-known/apple-app-site-association"
     to = "https://clipboardy.azurewebsites.net/apple-app-site-association"
+    status = 200
+    force = true
+    [redirects.headers]
+        Content-Type = "application/json"
+[[redirects]]
+    from = "/.well-known/android-app-site-association"
+    to = "https://clipboardy.azurewebsites.net/android-app-site-association"
     status = 200
     force = true
     [redirects.headers]
