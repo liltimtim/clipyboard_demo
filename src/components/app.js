@@ -15,6 +15,21 @@ export default class App extends Component {
     this.state = {
       name: null
     };
+  }
+  /** Gets fired when the route changes.
+   *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
+   *	@param {string} event.url	The newly routed URL
+   */
+  handleRoute = e => {
+    this.currentUrl = e.url;
+  };
+
+  handleClientRouteChange(name) {
+    // this.setState({ name });
+  }
+
+  render() {
+    const { name } = this.state;
     // create blog
     var dynamicManifest = {
       name: `${Math.random()} Cliip`,
@@ -38,24 +53,12 @@ export default class App extends Component {
       ]
     };
     let strManifest = JSON.stringify(dynamicManifest);
-    let blob = new Blob([strManifest], { type: "application/json" });
+    var blobUtil = require("blob-util");
+    var b = blobUtil.createBlob([strManifest], { type: "application/json" });
     let url = URL.createObjectURL(blob);
-    document.querySelector("#app-manifest").setAttribute("href", url);
-  }
-  /** Gets fired when the route changes.
-   *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
-   *	@param {string} event.url	The newly routed URL
-   */
-  handleRoute = e => {
-    this.currentUrl = e.url;
-  };
 
-  handleClientRouteChange(name) {
-    // this.setState({ name });
-  }
+    window.document.querySelector("#app-manifest").setAttribute("href", url);
 
-  render() {
-    const { name } = this.state;
     return (
       <div id="app">
         <Header />

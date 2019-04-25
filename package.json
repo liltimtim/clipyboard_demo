@@ -7,8 +7,8 @@
     "start": "per-env",
     "start:production": "npm run -s serve",
     "start:development": "npm run -s dev",
-    "build": "preact build && cp ./src/apple-app-site-association ./build",
-    "serve": "preact build && preact serve",
+    "build": "preact build --no-prerender && cp ./src/apple-app-site-association ./build",
+    "serve": "preact build --template ./src/template/index.html --no-prerender && preact serve",
     "dev": "preact watch",
     "lint": "eslint src",
     "test": "jest"
@@ -30,6 +30,8 @@
     "preact-render-spy": "^1.2.1"
   },
   "dependencies": {
+    "blob": "0.0.5",
+    "blob-util": "^2.0.2",
     "clipboard": "^2.0.4",
     "preact": "^8.2.6",
     "preact-cli-plugin-async": "^2.0.0",
