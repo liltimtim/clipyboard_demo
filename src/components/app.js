@@ -54,10 +54,10 @@ export default class App extends Component {
     };
     let strManifest = JSON.stringify(dynamicManifest);
     var blobUtil = require("blob-util");
-    var b = blobUtil.createBlob([strManifest], { type: "application/json" });
+    var blob = blobUtil.createBlob([strManifest], { type: "application/json" });
     let url = URL.createObjectURL(blob);
-
-    window.document.querySelector("#app-manifest").setAttribute("href", url);
+    console.log(document);
+    document.querySelector("#app-manifest").setAttribute("href", url);
 
     return (
       <div id="app">

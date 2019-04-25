@@ -2,76 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>clipboard_web</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="manifest" id="app-manifest" />
-    <meta name="theme-color" content="#673ab8" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link href="/bundle.7e56a.css" rel="preload" as="style" />
-    <style>
-      body,
-      html {
-        height: 100%;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        background: #fafafa;
-        font-family: Helvetica Neue, arial, sans-serif;
-        font-weight: 400;
-        color: #444;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      #app {
-        height: 100%;
-      }
-      .header__3QGkI {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 56px;
-        padding: 0;
-        background: #673ab7;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        z-index: 50;
-      }
-      .header__3QGkI nav {
-        float: right;
-        font-size: 100%;
-      }
-      .header__3QGkI nav a {
-        display: inline-block;
-        height: 56px;
-        line-height: 56px;
-        padding: 0 15px;
-        min-width: 50px;
-        text-align: center;
-        background: hsla(0, 0%, 100%, 0);
-        text-decoration: none;
-        color: #fff;
-        will-change: background-color;
-      }
-      .header__3QGkI nav a:active,
-      .header__3QGkI nav a:hover {
-        background: rgba(0, 0, 0, 0.2);
-      }
-      .header__3QGkI nav a.active__3gItZ {
-        background: rgba(0, 0, 0, 0.4);
-      }
-    </style>
+    <% if (htmlWebpackPlugin.options.manifest.theme_color) { %>
+    <meta
+      name="theme-color"
+      content="<%= htmlWebpackPlugin.options.manifest.theme_color %>"
+    />
+    <% } %> <% const loadManifest =
+    htmlWebpackPlugin.options.createLoadManifest(compilation.assets,
+    webpack.namedChunkGroups);%> <% const filesRegexp =
+    htmlWebpackPlugin.options.inlineCss ? /\.(chunk\.\w{5}\.css|js)$/ :
+    /\.(css|js)$/;%> <% for (const file in
+    loadManifest[htmlWebpackPlugin.options.url]) { %> <% if
+    (htmlWebpackPlugin.options.preload && file && file.match(filesRegexp)) { %>
+    <% /* crossorigin for main bundle as that is loaded from `<script
+    type=module` tag, other lazy loaded bundles are from webpack so its not
+    needed */ %> <link rel="preload" href="<%=
+    htmlWebpackPlugin.files.publicPath + file %>" as="<%=
+    file.match(/\.css$/)?'style':'script' %>" <%=
+    file.match(/bundle\.\w{5}\.esm\.js$/)?'crossorigin="anonymous"':'' %>> <% }
+    %> <% } %>
   </head>
   <body>
-    <div id="app">
-      <header class="header__3QGkI">
-        <nav><a href="/" class="active__3gItZ">Home</a></nav>
-      </header>
-    </div>
+    <%= htmlWebpackPlugin.options.ssr() %> <% if (webpack.assets.filter(entry =>
+    entry.name.match(/bundle(\.\w{5})?.esm.js$/)).length > 0) { %> <% /* Fix for
+    safari < 11 nomodule bug. TODO: Do the following only for safari. */ %>
     <script>
       !(function() {
         var e = document,
@@ -92,16 +51,36 @@
             e.head.appendChild(t),
             t.remove();
         }
-      })();</script
-    ><script
+      })();
+    </script>
+    <script
       crossorigin="anonymous"
-      src="/bundle.26f49.esm.js"
+      src="<%= htmlWebpackPlugin.files.publicPath %><%= webpack.assets.filter(entry => entry.name.match(/bundle(\.\w{5})?.esm.js$/))[0].name %>"
       type="module"
-    ></script
-    ><script nomodule="">
+    ></script>
+    <% /*Fetch and Promise polyfills are not needed for browsers that support
+    type=module Please re-evaluate below line if adding more polyfills.*/ %>
+    <script nomodule>
       window.fetch ||
-        document.write('<script src="/polyfills.e09e9.js"><\/script>');</script
-    ><script nomodule="" defer="defer" src="/bundle.e0b75.js"></script
-    ><link rel="stylesheet" href="/bundle.7e56a.css" />
+        document.write(
+          '<script src="<%= htmlWebpackPlugin.files.chunks["polyfills"].entry %>"><\/script>'
+        );
+    </script>
+    <script
+      nomodule
+      defer
+      src="<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>"
+    ></script>
+    <% } else { %>
+    <script <%="htmlWebpackPlugin.options.scriptLoading" %>
+      src="<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>">
+    </script>
+    <script>
+      window.fetch ||
+        document.write(
+          '<script src="<%= htmlWebpackPlugin.files.chunks["polyfills"].entry %>"><\/script>'
+        );
+    </script>
+    <% } %>
   </body>
 </html>

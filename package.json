@@ -9,7 +9,7 @@
     "start:development": "npm run -s dev",
     "build": "preact build --no-prerender && cp ./src/apple-app-site-association ./build",
     "serve": "preact build --template ./src/template/index.html --no-prerender && preact serve",
-    "dev": "preact watch",
+    "dev": "preact watch --template ./src/template/index.html",
     "lint": "eslint src",
     "test": "jest"
   },
