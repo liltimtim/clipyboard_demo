@@ -19,3 +19,8 @@
     force = true
     [redirects.headers]
         Content-Type = "application/json"
+[[redirects]]
+    from = "/offices/*"
+    to = "/index.html"
+    status = 200
+    force = true
