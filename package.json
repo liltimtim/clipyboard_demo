@@ -7,7 +7,7 @@
     "start": "per-env",
     "start:production": "npm run -s serve",
     "start:development": "npm run -s dev",
-    "build": "preact build --no-prerender && cp ./src/apple-app-site-association ./build",
+    "build": "preact build --template ./src/template/index.html --no-prerender  && cp ./src/apple-app-site-association ./build",
     "serve": "preact build --template ./src/template/index.html --no-prerender && preact serve",
     "dev": "preact watch --template ./src/template/index.html",
     "lint": "eslint src",
