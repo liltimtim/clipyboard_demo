@@ -7,6 +7,8 @@ import Clients from "../routes/clients";
 import Client from "../routes/client";
 import Home from "../routes/home";
 import AppOpen from "../routes/appopen";
+import Offices from "../routes/offices";
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +30,35 @@ export default class App extends Component {
 
   render() {
     const { name } = this.state;
+    // create blog
+    var dynamicManifest = {
+      name: `${Math.random()} Cliip`,
+      short_name: `${Math.random()} Cliip`,
+      start_url: "/",
+      display: "standalone",
+      orientation: "portrait",
+      background_color: "#fff",
+      theme_color: "#673ab8",
+      icons: [
+        {
+          src: "/assets/icons/android-chrome-192x192.png",
+          type: "image/png",
+          sizes: "192x192"
+        },
+        {
+          src: "/assets/icons/android-chrome-512x512.png",
+          type: "image/png",
+          sizes: "512x512"
+        }
+      ]
+    };
+    let strManifest = JSON.stringify(dynamicManifest);
+    var blobUtil = require("blob-util");
+    var blob = blobUtil.createBlob([strManifest], { type: "application/json" });
+    let url = URL.createObjectURL(blob);
+    console.log(document);
+    document.querySelector("#app-manifest").setAttribute("href", url);
+
     return (
       <div id="app">
         <Header />
@@ -36,6 +67,7 @@ export default class App extends Component {
           <AppOpen path="/appopen" />
           <Clients path="/preparer/:prepid" />
           <Client path="/client/:clientid" />
+          <Offices path="/offices/:officeid" />
         </Router>
       </div>
     );
